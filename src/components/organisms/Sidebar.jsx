@@ -12,9 +12,10 @@ const Sidebar = () => {
   const { logout } = useContext(AuthContext)
   const { user } = useSelector((state) => state.user)
 
-  const navigation = [
+const navigation = [
     { name: "Dashboard", href: "/dashboard", icon: "BarChart3" },
     { name: "Contacts", href: "/contacts", icon: "Users" },
+    { name: "Companies", href: "/companies", icon: "Building2" },
     { name: "Deals", href: "/deals", icon: "Target" },
     { name: "Activities", href: "/activities", icon: "Activity" },
   ]

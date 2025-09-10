@@ -12,6 +12,7 @@ import PromptPassword from '@/components/pages/PromptPassword'
 import Layout from "@/components/organisms/Layout"
 import Dashboard from "@/components/pages/Dashboard"
 import Contacts from "@/components/pages/Contacts"
+import Companies from "@/components/pages/Companies"
 import Deals from "@/components/pages/Deals"
 import Activities from "@/components/pages/Activities"
 
@@ -133,6 +134,7 @@ function AppContent() {
             <Route index element={<Dashboard />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="contacts" element={<Contacts />} />
+<Route path="companies" element={<Companies />} />
             <Route path="deals" element={<Deals />} />
             <Route path="activities" element={<Activities />} />
           </Route>
