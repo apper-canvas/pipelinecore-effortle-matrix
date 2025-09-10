@@ -258,15 +258,6 @@ export const companyService = {
   getById,
   create,
   update,
-  deleteCompany
-};
-
-// Export service object for backward compatibility
-export const companyService = {
-  getAll,
-  getById,
-  create,
-  update,
   delete: deleteCompany
 };
 // Default export
