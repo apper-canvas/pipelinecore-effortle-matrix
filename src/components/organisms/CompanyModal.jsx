@@ -111,7 +111,7 @@ const CompanyModal = ({ company, isOpen, onClose, onSave }) => {
     try {
       let result
       if (company) {
-        result = await companyService.update(company.Id, formData)
+result = await companyService.update(company.Id, formData)
       } else {
         result = await companyService.create(formData)
       }

@@ -35,8 +35,8 @@ const Companies = () => {
     setLoading(true)
     setError(null)
     try {
-      const data = await companyService.getAll()
-      setCompanies(data)
+const data = await companyService.getAll()
+      setCompanies(data || [])
     } catch (err) {
       setError('Failed to load companies. Please try again.')
       console.error('Error loading companies:', err)
@@ -108,7 +108,7 @@ const Companies = () => {
 
     try {
       await companyService.delete(companyId)
-      setCompanies(prev => prev.filter(c => c.Id !== companyId))
+setCompanies(prev => prev.filter(c => c.Id !== companyId))
       toast.success('Company deleted successfully')
     } catch (error) {
       console.error('Error deleting company:', error)
@@ -118,10 +118,10 @@ const Companies = () => {
 
   const handleSave = async (savedCompany) => {
     if (selectedCompany) {
-      setCompanies(prev => prev.map(c => c.Id === savedCompany.Id ? savedCompany : c))
+setCompanies(prev => prev.map(c => c.Id === savedCompany.Id ? savedCompany : c))
       toast.success('Company updated successfully')
     } else {
-      setCompanies(prev => [savedCompany, ...prev])
+setCompanies(prev => [savedCompany, ...prev])
       toast.success('Company created successfully')
     }
     setIsModalOpen(false)
@@ -230,7 +230,7 @@ const Companies = () => {
               <tbody className="divide-y divide-slate-200">
                 {filteredCompanies.map((company) => (
                   <motion.tr
-                    key={company.Id}
+key={company.Id}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     className="hover:bg-slate-50 transition-colors duration-200"
@@ -275,7 +275,7 @@ const Companies = () => {
                         <Button
                           variant="ghost"
                           size="sm"
-                          onClick={() => handleDelete(company.Id)}
+onClick={() => handleDelete(company.Id)}
                           className="text-red-600 hover:text-red-700 hover:bg-red-50"
                         >
                           <ApperIcon name="Trash2" className="h-4 w-4" />
