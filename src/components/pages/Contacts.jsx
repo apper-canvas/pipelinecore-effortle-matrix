@@ -49,11 +49,11 @@ const Contacts = () => {
     let filtered = [...contacts]
 
     if (searchTerm) {
-      filtered = filtered.filter(contact =>
-        contact.firstName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        contact.lastName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        contact.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        contact.company?.toLowerCase().includes(searchTerm.toLowerCase())
+filtered = filtered.filter(contact =>
+        contact.first_name_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        contact.last_name_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        contact.email_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        contact.company_c?.toLowerCase().includes(searchTerm.toLowerCase())
       )
     }
 
@@ -61,12 +61,12 @@ const Contacts = () => {
       let aValue = a[sortBy]
       let bValue = b[sortBy]
 
-      if (sortBy === "name") {
-        aValue = `${a.firstName} ${a.lastName}`
-        bValue = `${b.firstName} ${b.lastName}`
+if (sortBy === "name") {
+        aValue = `${a.first_name_c} ${a.last_name_c}`
+        bValue = `${b.first_name_c} ${b.last_name_c}`
       }
 
-      if (sortBy === "lastActivity" || sortBy === "createdAt") {
+if (sortBy === "last_activity_c" || sortBy === "created_at_c") {
         aValue = new Date(aValue)
         bValue = new Date(bValue)
       }
@@ -239,45 +239,45 @@ const Contacts = () => {
                   >
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="bg-gradient-to-br from-primary-600 to-primary-700 text-white w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm">
-                          {contact.firstName?.[0]}{contact.lastName?.[0]}
+<div className="bg-gradient-to-br from-primary-600 to-primary-700 text-white w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm">
+                          {contact.first_name_c?.[0]}{contact.last_name_c?.[0]}
                         </div>
                         <div>
                           <div className="font-semibold text-slate-900">
-                            {contact.firstName} {contact.lastName}
+                            {contact.first_name_c} {contact.last_name_c}
                           </div>
-                          <div className="text-sm text-slate-500">{contact.position}</div>
+                          <div className="text-sm text-slate-500">{contact.position_c}</div>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4">
-                      <div className="font-medium text-slate-900">{contact.company}</div>
+<td className="px-6 py-4">
+                      <div className="font-medium text-slate-900">{contact.company_c}</div>
                     </td>
                     <td className="px-6 py-4">
                       <div className="space-y-1">
                         <div className="flex items-center gap-2 text-sm text-slate-600">
-                          <ApperIcon name="Mail" className="h-3 w-3" />
-                          {contact.email}
+<ApperIcon name="Mail" className="h-3 w-3" />
+                          {contact.email_c}
                         </div>
-                        {contact.phone && (
+                        {contact.phone_c && (
                           <div className="flex items-center gap-2 text-sm text-slate-600">
                             <ApperIcon name="Phone" className="h-3 w-3" />
-                            {contact.phone}
+                            {contact.phone_c}
                           </div>
                         )}
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="flex flex-wrap gap-1">
-                        {contact.tags?.map((tag) => (
+<div className="flex flex-wrap gap-1">
+                        {(Array.isArray(contact.tags_c) ? contact.tags_c : (contact.tags_c ? contact.tags_c.split(',').filter(Boolean) : []))?.map((tag) => (
                           <Badge key={tag} variant="default" size="sm">
                             {tag}
                           </Badge>
                         ))}
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-sm text-slate-600">
-                      {format(new Date(contact.lastActivity), "MMM dd, yyyy")}
+<td className="px-6 py-4 text-sm text-slate-600">
+                      {format(new Date(contact.last_activity_c), "MMM dd, yyyy")}
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center justify-end gap-2">

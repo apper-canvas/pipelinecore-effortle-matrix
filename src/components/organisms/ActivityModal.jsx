@@ -9,14 +9,14 @@ import { contactService } from "@/services/api/contactService"
 import { dealService } from "@/services/api/dealService"
 
 const ActivityModal = ({ activity, isOpen, onClose, onSave }) => {
-  const [formData, setFormData] = useState({
-    type: "Call",
-    subject: "",
-    notes: "",
-    contactId: "",
-    dealId: "",
-    date: "",
-    duration: ""
+const [formData, setFormData] = useState({
+    type_c: "Call",
+    subject_c: "",
+    notes_c: "",
+    contact_id_c: "",
+    deal_id_c: "",
+    date_c: "",
+    duration_c: ""
   })
   const [contacts, setContacts] = useState([])
   const [deals, setDeals] = useState([])
@@ -32,13 +32,13 @@ const ActivityModal = ({ activity, isOpen, onClose, onSave }) => {
   useEffect(() => {
     if (activity) {
       setFormData({
-        type: activity.type || "Call",
-        subject: activity.subject || "",
-        notes: activity.notes || "",
-        contactId: activity.contactId || "",
-        dealId: activity.dealId || "",
-        date: activity.date ? activity.date.split("T")[0] : new Date().toISOString().split("T")[0],
-        duration: activity.duration?.toString() || ""
+type_c: activity.type_c || "Call",
+        subject_c: activity.subject_c || "",
+        notes_c: activity.notes_c || "",
+        contact_id_c: activity.contact_id_c?.toString() || "",
+        deal_id_c: activity.deal_id_c?.toString() || "",
+        date_c: activity.date_c ? activity.date_c.split("T")[0] : new Date().toISOString().split("T")[0],
+        duration_c: activity.duration_c?.toString() || ""
       })
     } else {
       setFormData({
@@ -74,10 +74,10 @@ const ActivityModal = ({ activity, isOpen, onClose, onSave }) => {
     setLoading(true)
 
     try {
-      const activityData = {
+const activityData = {
         ...formData,
-        duration: parseInt(formData.duration) || 0,
-        date: new Date(formData.date).toISOString()
+        duration_c: parseInt(formData.duration_c) || 0,
+        date_c: new Date(formData.date_c).toISOString()
       }
 
       let result
@@ -132,8 +132,8 @@ const ActivityModal = ({ activity, isOpen, onClose, onSave }) => {
             <FormField
               label="Activity Type"
               type="select"
-              value={formData.type}
-              onChange={(e) => setFormData(prev => ({ ...prev, type: e.target.value }))}
+value={formData.type_c}
+              onChange={(e) => setFormData(prev => ({ ...prev, type_c: e.target.value }))}
             >
               <option value="Call">Call</option>
               <option value="Email">Email</option>
@@ -145,26 +145,26 @@ const ActivityModal = ({ activity, isOpen, onClose, onSave }) => {
             <FormField
               label="Date"
               type="date"
-              value={formData.date}
-              onChange={(e) => setFormData(prev => ({ ...prev, date: e.target.value }))}
+              value={formData.date_c}
+              onChange={(e) => setFormData(prev => ({ ...prev, date_c: e.target.value }))}
               required
             />
           </div>
 
-          <FormField
+<FormField
             label="Subject"
-            value={formData.subject}
-            onChange={(e) => setFormData(prev => ({ ...prev, subject: e.target.value }))}
+            value={formData.subject_c}
+            onChange={(e) => setFormData(prev => ({ ...prev, subject_c: e.target.value }))}
             placeholder="Activity subject..."
             required
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <FormField
+<FormField
               label="Contact"
               type="select"
-              value={formData.contactId}
-              onChange={(e) => setFormData(prev => ({ ...prev, contactId: e.target.value }))}
+              value={formData.contact_id_c}
+              onChange={(e) => setFormData(prev => ({ ...prev, contact_id_c: e.target.value }))}
             >
               <option value="">Select contact...</option>
               {loadingData ? (
@@ -172,17 +172,17 @@ const ActivityModal = ({ activity, isOpen, onClose, onSave }) => {
               ) : (
                 contacts.map(contact => (
                   <option key={contact.Id} value={contact.Id}>
-                    {contact.firstName} {contact.lastName}
+                    {contact.first_name_c} {contact.last_name_c}
                   </option>
                 ))
               )}
             </FormField>
             
-            <FormField
+<FormField
               label="Related Deal"
               type="select"
-              value={formData.dealId}
-              onChange={(e) => setFormData(prev => ({ ...prev, dealId: e.target.value }))}
+              value={formData.deal_id_c}
+              onChange={(e) => setFormData(prev => ({ ...prev, deal_id_c: e.target.value }))}
             >
               <option value="">Select deal...</option>
               {loadingData ? (
@@ -190,27 +190,27 @@ const ActivityModal = ({ activity, isOpen, onClose, onSave }) => {
               ) : (
                 deals.map(deal => (
                   <option key={deal.Id} value={deal.Id}>
-                    {deal.title}
+                    {deal.title_c}
                   </option>
                 ))
               )}
             </FormField>
           </div>
 
-          <FormField
+<FormField
             label="Duration (minutes)"
             type="number"
-            value={formData.duration}
-            onChange={(e) => setFormData(prev => ({ ...prev, duration: e.target.value }))}
+            value={formData.duration_c}
+            onChange={(e) => setFormData(prev => ({ ...prev, duration_c: e.target.value }))}
             placeholder="0"
             min="0"
           />
 
-          <FormField
+<FormField
             label="Notes"
             type="textarea"
-            value={formData.notes}
-            onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))}
+            value={formData.notes_c}
+            onChange={(e) => setFormData(prev => ({ ...prev, notes_c: e.target.value }))}
             placeholder="Activity notes..."
             rows={4}
           />

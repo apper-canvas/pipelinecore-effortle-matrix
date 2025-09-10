@@ -45,8 +45,8 @@ const DealCard = ({
       <div className="space-y-3">
         <div className="flex items-start justify-between">
           <div className="flex-1 min-w-0">
-            <h3 className="font-semibold text-slate-900 truncate mb-1">{deal.title}</h3>
-            <p className="text-sm text-slate-600 truncate">{deal.company}</p>
+<h3 className="font-semibold text-slate-900 truncate mb-1">{deal.title_c}</h3>
+            <p className="text-sm text-slate-600 truncate">{deal.company_c}</p>
           </div>
           <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
             <Button variant="ghost" size="sm" onClick={() => onEdit(deal)}>
@@ -59,34 +59,34 @@ const DealCard = ({
         </div>
 
         <div className="space-y-2">
-          <Badge variant={getStageVariant(deal.stage)} size="sm">
-            {deal.stage}
+<Badge variant={getStageVariant(deal.stage_c)} size="sm">
+            {deal.stage_c}
           </Badge>
           
           <div className="flex items-center justify-between">
-            <span className="text-lg font-bold text-slate-900">
-              {formatCurrency(deal.value)}
+<span className="text-lg font-bold text-slate-900">
+              {formatCurrency(deal.value_c)}
             </span>
-            <span className={cn("text-sm font-medium", getProbabilityColor(deal.probability))}>
-              {deal.probability}%
+            <span className={cn("text-sm font-medium", getProbabilityColor(deal.probability_c))}>
+              {deal.probability_c}%
             </span>
           </div>
 
           <div className="text-xs text-slate-500 space-y-1">
             <div className="flex items-center gap-1">
-              <ApperIcon name="Calendar" className="h-3 w-3" />
-              <span>Close: {format(new Date(deal.expectedCloseDate), "MMM dd, yyyy")}</span>
+<ApperIcon name="Calendar" className="h-3 w-3" />
+              <span>Close: {format(new Date(deal.expected_close_date_c), "MMM dd, yyyy")}</span>
             </div>
             <div className="flex items-center gap-1">
               <ApperIcon name="Clock" className="h-3 w-3" />
-              <span>Updated: {format(new Date(deal.lastUpdated), "MMM dd")}</span>
+              <span>Updated: {format(new Date(deal.last_updated_c), "MMM dd")}</span>
             </div>
           </div>
         </div>
 
         <div className="pt-2 border-t border-slate-100">
-          <select 
-            value={deal.stage}
+<select 
+            value={deal.stage_c}
             onChange={(e) => onStageChange(deal.Id, e.target.value)}
             className="w-full text-xs border-0 bg-transparent text-slate-600 focus:outline-none focus:ring-0 cursor-pointer"
           >

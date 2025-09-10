@@ -7,38 +7,38 @@ import ApperIcon from "@/components/ApperIcon"
 import { contactService } from "@/services/api/contactService"
 
 const ContactModal = ({ contact, isOpen, onClose, onSave }) => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    company: "",
-    position: "",
-    tags: []
+const [formData, setFormData] = useState({
+    first_name_c: "",
+    last_name_c: "",
+    email_c: "",
+    phone_c: "",
+    company_c: "",
+    position_c: "",
+    tags_c: []
   })
   const [loading, setLoading] = useState(false)
   const [tagInput, setTagInput] = useState("")
 
-  useEffect(() => {
+useEffect(() => {
     if (contact) {
       setFormData({
-        firstName: contact.firstName || "",
-        lastName: contact.lastName || "",
-        email: contact.email || "",
-        phone: contact.phone || "",
-        company: contact.company || "",
-        position: contact.position || "",
-        tags: contact.tags || []
+        first_name_c: contact.first_name_c || "",
+        last_name_c: contact.last_name_c || "",
+        email_c: contact.email_c || "",
+        phone_c: contact.phone_c || "",
+        company_c: contact.company_c || "",
+        position_c: contact.position_c || "",
+        tags_c: Array.isArray(contact.tags_c) ? contact.tags_c : (contact.tags_c ? contact.tags_c.split(',').filter(Boolean) : [])
       })
     } else {
       setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        company: "",
-        position: "",
-        tags: []
+        first_name_c: "",
+        last_name_c: "",
+        email_c: "",
+        phone_c: "",
+        company_c: "",
+        position_c: "",
+        tags_c: []
       })
     }
   }, [contact, isOpen])
@@ -47,18 +47,18 @@ const ContactModal = ({ contact, isOpen, onClose, onSave }) => {
     e.preventDefault()
     setLoading(true)
 
-    try {
+try {
       let result
       if (contact) {
         result = await contactService.update(contact.Id, {
           ...formData,
-          lastActivity: new Date().toISOString()
+          last_activity_c: new Date().toISOString()
         })
       } else {
         result = await contactService.create({
           ...formData,
-          createdAt: new Date().toISOString(),
-          lastActivity: new Date().toISOString()
+          created_at_c: new Date().toISOString(),
+          last_activity_c: new Date().toISOString()
         })
       }
 
@@ -72,20 +72,20 @@ const ContactModal = ({ contact, isOpen, onClose, onSave }) => {
     }
   }
 
-  const addTag = () => {
-    if (tagInput.trim() && !formData.tags.includes(tagInput.trim())) {
+const addTag = () => {
+    if (tagInput.trim() && !formData.tags_c.includes(tagInput.trim())) {
       setFormData(prev => ({
         ...prev,
-        tags: [...prev.tags, tagInput.trim()]
+        tags_c: [...prev.tags_c, tagInput.trim()]
       }))
       setTagInput("")
     }
   }
 
-  const removeTag = (tagToRemove) => {
+const removeTag = (tagToRemove) => {
     setFormData(prev => ({
       ...prev,
-      tags: prev.tags.filter(tag => tag !== tagToRemove)
+      tags_c: prev.tags_c.filter(tag => tag !== tagToRemove)
     }))
   }
 
@@ -121,49 +121,49 @@ const ContactModal = ({ contact, isOpen, onClose, onSave }) => {
 
         <form onSubmit={handleSubmit} className="p-6 space-y-6 overflow-y-auto max-h-[calc(90vh-120px)]">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <FormField
+<FormField
               label="First Name"
-              value={formData.firstName}
-              onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
+              value={formData.first_name_c}
+              onChange={(e) => setFormData(prev => ({ ...prev, first_name_c: e.target.value }))}
               required
             />
             
             <FormField
               label="Last Name"
-              value={formData.lastName}
-              onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
+              value={formData.last_name_c}
+              onChange={(e) => setFormData(prev => ({ ...prev, last_name_c: e.target.value }))}
               required
             />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <FormField
+<FormField
               label="Email"
               type="email"
-              value={formData.email}
-              onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+              value={formData.email_c}
+              onChange={(e) => setFormData(prev => ({ ...prev, email_c: e.target.value }))}
               required
             />
             
             <FormField
               label="Phone"
               type="tel"
-              value={formData.phone}
-              onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+              value={formData.phone_c}
+              onChange={(e) => setFormData(prev => ({ ...prev, phone_c: e.target.value }))}
             />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <FormField
+<FormField
               label="Company"
-              value={formData.company}
-              onChange={(e) => setFormData(prev => ({ ...prev, company: e.target.value }))}
+              value={formData.company_c}
+              onChange={(e) => setFormData(prev => ({ ...prev, company_c: e.target.value }))}
             />
             
             <FormField
               label="Position"
-              value={formData.position}
-              onChange={(e) => setFormData(prev => ({ ...prev, position: e.target.value }))}
+              value={formData.position_c}
+              onChange={(e) => setFormData(prev => ({ ...prev, position_c: e.target.value }))}
             />
           </div>
 
@@ -182,9 +182,9 @@ const ContactModal = ({ contact, isOpen, onClose, onSave }) => {
                 <ApperIcon name="Plus" className="h-4 w-4" />
               </Button>
             </div>
-            {formData.tags.length > 0 && (
+{formData.tags_c.length > 0 && (
               <div className="flex flex-wrap gap-2">
-                {formData.tags.map((tag) => (
+                {formData.tags_c.map((tag) => (
                   <span
                     key={tag}
                     className="inline-flex items-center gap-1 px-2 py-1 bg-primary-100 text-primary-800 rounded-md text-sm"

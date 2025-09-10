@@ -56,22 +56,22 @@ const Activities = () => {
     let filtered = [...activities]
 
     if (searchTerm) {
-      filtered = filtered.filter(activity =>
-        activity.subject?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        activity.notes?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        activity.type?.toLowerCase().includes(searchTerm.toLowerCase())
+filtered = filtered.filter(activity =>
+        activity.subject_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        activity.notes_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        activity.type_c?.toLowerCase().includes(searchTerm.toLowerCase())
       )
     }
 
-    if (filterType !== "all") {
-      filtered = filtered.filter(activity => activity.type.toLowerCase() === filterType.toLowerCase())
+if (filterType !== "all") {
+      filtered = filtered.filter(activity => activity.type_c.toLowerCase() === filterType.toLowerCase())
     }
 
     filtered.sort((a, b) => {
       let aValue = a[sortBy]
       let bValue = b[sortBy]
 
-      if (sortBy === "date") {
+if (sortBy === "date_c") {
         aValue = new Date(aValue)
         bValue = new Date(bValue)
       }
@@ -84,9 +84,9 @@ const Activities = () => {
     setFilteredActivities(filtered)
   }
 
-  const getContactName = (contactId) => {
+const getContactName = (contactId) => {
     const contact = contacts.find(c => c.Id.toString() === contactId?.toString())
-    return contact ? `${contact.firstName} ${contact.lastName}` : "Unknown Contact"
+    return contact ? `${contact.first_name_c} ${contact.last_name_c}` : "Unknown Contact"
   }
 
   const getActivityIcon = (type) => {
@@ -241,41 +241,41 @@ const Activities = () => {
                 className="p-6 hover:bg-slate-50 transition-colors duration-200"
               >
                 <div className="flex items-start gap-4">
-                  <div className={`p-3 rounded-xl ${getActivityColor(activity.type)}`}>
-                    <ApperIcon name={getActivityIcon(activity.type)} className="h-5 w-5" />
+<div className={`p-3 rounded-xl ${getActivityColor(activity.type_c)}`}>
+                    <ApperIcon name={getActivityIcon(activity.type_c)} className="h-5 w-5" />
                   </div>
                   
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
-                          <Badge variant={activity.type.toLowerCase()} size="sm">
-                            {activity.type}
+                          <Badge variant={activity.type_c.toLowerCase()} size="sm">
+                            {activity.type_c}
                           </Badge>
-                          <h3 className="font-semibold text-slate-900">{activity.subject}</h3>
+                          <h3 className="font-semibold text-slate-900">{activity.subject_c}</h3>
                         </div>
                         
-                        <p className="text-sm text-slate-600 mb-2 line-clamp-2">
-                          {activity.notes}
+<p className="text-sm text-slate-600 mb-2 line-clamp-2">
+                          {activity.notes_c}
                         </p>
                         
                         <div className="flex items-center gap-4 text-xs text-slate-500">
                           <div className="flex items-center gap-1">
-                            <ApperIcon name="Calendar" className="h-3 w-3" />
-                            <span>{format(new Date(activity.date), "MMM dd, yyyy 'at' h:mm a")}</span>
+<ApperIcon name="Calendar" className="h-3 w-3" />
+                            <span>{format(new Date(activity.date_c), "MMM dd, yyyy 'at' h:mm a")}</span>
                           </div>
                           
-                          {activity.contactId && (
+                          {activity.contact_id_c && (
                             <div className="flex items-center gap-1">
                               <ApperIcon name="User" className="h-3 w-3" />
-                              <span>{getContactName(activity.contactId)}</span>
+                              <span>{getContactName(activity.contact_id_c)}</span>
                             </div>
                           )}
                           
-                          {activity.duration > 0 && (
+{activity.duration_c > 0 && (
                             <div className="flex items-center gap-1">
                               <ApperIcon name="Clock" className="h-3 w-3" />
-                              <span>{activity.duration} min</span>
+                              <span>{activity.duration_c} min</span>
                             </div>
                           )}
                         </div>

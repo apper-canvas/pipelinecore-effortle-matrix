@@ -53,13 +53,12 @@ const Dashboard = () => {
     }).format(amount)
   }
 
-  const getMetrics = () => {
+const getMetrics = () => {
     const totalDeals = deals.length
-    const totalValue = deals.reduce((sum, deal) => sum + (deal.value || 0), 0)
-    const closedWonDeals = deals.filter(deal => deal.stage === "Closed Won")
-    const closedWonValue = closedWonDeals.reduce((sum, deal) => sum + (deal.value || 0), 0)
+    const totalValue = deals.reduce((sum, deal) => sum + (deal.value_c || 0), 0)
+    const closedWonDeals = deals.filter(deal => deal.stage_c === "Closed Won")
+    const closedWonValue = closedWonDeals.reduce((sum, deal) => sum + (deal.value_c || 0), 0)
     const winRate = totalDeals > 0 ? ((closedWonDeals.length / totalDeals) * 100).toFixed(1) : "0"
-    
     return {
       totalValue,
       totalDeals,
@@ -69,15 +68,15 @@ const Dashboard = () => {
   }
 
   const getRecentActivities = () => {
-    return activities
-      .sort((a, b) => new Date(b.date) - new Date(a.date))
+return activities
+      .sort((a, b) => new Date(b.date_c) - new Date(a.date_c))
       .slice(0, 5)
   }
 
   const getPipelineDeals = () => {
-    return deals
-      .filter(deal => !["Closed Won", "Closed Lost"].includes(deal.stage))
-      .sort((a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated))
+return deals
+      .filter(deal => !["Closed Won", "Closed Lost"].includes(deal.stage_c))
+      .sort((a, b) => new Date(b.last_updated_c) - new Date(a.last_updated_c))
       .slice(0, 6)
   }
 
@@ -189,15 +188,15 @@ const Dashboard = () => {
                       <div className="bg-gradient-to-br from-primary-50 to-primary-100 p-2 rounded-lg">
                         <ApperIcon name={getActivityIcon(activity.type)} className="h-4 w-4 text-primary-600" />
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <h4 className="font-semibold text-slate-900 truncate">{activity.subject}</h4>
-                        <p className="text-sm text-slate-600 truncate">{activity.notes}</p>
+<div className="flex-1 min-w-0">
+                        <h4 className="font-semibold text-slate-900 truncate">{activity.subject_c}</h4>
+                        <p className="text-sm text-slate-600 truncate">{activity.notes_c}</p>
                         <p className="text-xs text-slate-500 mt-1">
-                          {format(new Date(activity.date), "MMM dd, yyyy 'at' h:mm a")}
+                          {format(new Date(activity.date_c), "MMM dd, yyyy 'at' h:mm a")}
                         </p>
                       </div>
-                      <Badge variant={activity.type.toLowerCase()} size="sm">
-                        {activity.type}
+                      <Badge variant={activity.type_c.toLowerCase()} size="sm">
+                        {activity.type_c}
                       </Badge>
                     </motion.div>
                   ))}
@@ -239,22 +238,22 @@ const Dashboard = () => {
                       <div className="space-y-3">
                         <div className="flex items-start justify-between">
                           <div className="flex-1 min-w-0">
-                            <h4 className="font-semibold text-slate-900 truncate">{deal.title}</h4>
-                            <p className="text-sm text-slate-600 truncate">{deal.company}</p>
+<h4 className="font-semibold text-slate-900 truncate">{deal.title_c}</h4>
+                            <p className="text-sm text-slate-600 truncate">{deal.company_c}</p>
                           </div>
                         </div>
                         
                         <div className="flex items-center justify-between">
-                          <Badge variant={getStageVariant(deal.stage)} size="sm">
-                            {deal.stage}
+                          <Badge variant={getStageVariant(deal.stage_c)} size="sm">
+                            {deal.stage_c}
                           </Badge>
                           <span className="font-bold text-slate-900">
-                            {formatCurrency(deal.value)}
+                            {formatCurrency(deal.value_c)}
                           </span>
                         </div>
                         
                         <div className="text-xs text-slate-500">
-                          Close: {format(new Date(deal.expectedCloseDate), "MMM dd, yyyy")}
+Close: {format(new Date(deal.expected_close_date_c), "MMM dd, yyyy")}
                         </div>
                       </div>
                     </motion.div>

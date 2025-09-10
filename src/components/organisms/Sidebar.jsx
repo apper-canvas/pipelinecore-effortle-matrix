@@ -1,13 +1,16 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { NavLink, useLocation } from "react-router-dom"
 import { motion } from "framer-motion"
+import { useSelector } from "react-redux"
 import { cn } from "@/utils/cn"
 import ApperIcon from "@/components/ApperIcon"
 import Button from "@/components/atoms/Button"
-
+import { AuthContext } from "../pages/../../App"
 const Sidebar = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const location = useLocation()
+  const { logout } = useContext(AuthContext)
+  const { user } = useSelector((state) => state.user)
 
   const navigation = [
     { name: "Dashboard", href: "/dashboard", icon: "BarChart3" },
@@ -59,7 +62,27 @@ const Sidebar = () => {
           })}
         </nav>
 
-        <div className="p-4 border-t border-slate-200">
+<div className="p-4 border-t border-slate-200 space-y-3">
+          {user && (
+            <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-lg p-3">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-6 h-6 bg-primary-600 rounded-full flex items-center justify-center text-white text-xs font-semibold">
+                  {user.firstName?.[0] || user.name?.[0] || 'U'}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-medium text-slate-900 truncate">
+                    {user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : user.name || 'User'}
+                  </p>
+                  <p className="text-xs text-slate-500 truncate">{user.emailAddress || user.email}</p>
+                </div>
+              </div>
+              <Button variant="secondary" size="sm" className="w-full" onClick={logout}>
+                <ApperIcon name="LogOut" className="h-4 w-4" />
+                Logout
+              </Button>
+            </div>
+          )}
+          
           <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-lg p-4">
             <h3 className="font-semibold text-slate-900 mb-1">Need Help?</h3>
             <p className="text-xs text-slate-600 mb-3">

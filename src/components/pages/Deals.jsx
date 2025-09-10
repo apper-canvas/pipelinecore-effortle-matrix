@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import { toast } from "react-toastify"
-import Button from "@/components/atoms/Button"
-import DealCard from "@/components/molecules/DealCard"
-import DealModal from "@/components/organisms/DealModal"
-import Loading from "@/components/ui/Loading"
-import Error from "@/components/ui/Error"
-import Empty from "@/components/ui/Empty"
-import ApperIcon from "@/components/ApperIcon"
-import { dealService } from "@/services/api/dealService"
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { toast } from "react-toastify";
+import { dealService } from "@/services/api/dealService";
+import ApperIcon from "@/components/ApperIcon";
+import Error from "@/components/ui/Error";
+import Empty from "@/components/ui/Empty";
+import Loading from "@/components/ui/Loading";
+import DealCard from "@/components/molecules/DealCard";
+import Button from "@/components/atoms/Button";
+import DealModal from "@/components/organisms/DealModal";
 
 const Deals = () => {
   const [deals, setDeals] = useState([])
@@ -37,13 +37,13 @@ const Deals = () => {
     }
   }
 
-  const getDealsByStage = (stage) => {
-    return deals.filter(deal => deal.stage === stage)
+const getDealsByStage = (stage) => {
+    return deals.filter(deal => deal.stage_c === stage)
   }
 
-  const getStageMetrics = (stage) => {
+const getStageMetrics = (stage) => {
     const stageDeals = getDealsByStage(stage)
-    const totalValue = stageDeals.reduce((sum, deal) => sum + (deal.value || 0), 0)
+    const totalValue = stageDeals.reduce((sum, deal) => sum + (deal.value_c || 0), 0)
     return {
       count: stageDeals.length,
       value: totalValue
@@ -108,11 +108,11 @@ const Deals = () => {
         case "Closed Lost": probability = 0; break;
       }
 
-      const updatedDeal = await dealService.update(dealId, {
+const updatedDeal = await dealService.update(dealId, {
         ...deal,
-        stage: newStage,
-        probability,
-        lastUpdated: new Date().toISOString()
+        stage_c: newStage,
+        probability_c: probability,
+        last_updated_c: new Date().toISOString()
       })
 
       setDeals(prev => prev.map(d => d.Id === dealId ? updatedDeal : d))
@@ -135,9 +135,9 @@ const Deals = () => {
   if (loading) return <Loading type="pipeline" />
   if (error) return <Error message={error} onRetry={loadDeals} />
 
-  const totalPipelineValue = deals
-    .filter(deal => !["Closed Won", "Closed Lost"].includes(deal.stage))
-    .reduce((sum, deal) => sum + (deal.value || 0), 0)
+const totalPipelineValue = deals
+    .filter(deal => !["Closed Won", "Closed Lost"].includes(deal.stage_c))
+    .reduce((sum, deal) => sum + (deal.value_c || 0), 0)
 
   return (
     <div className="space-y-6">
