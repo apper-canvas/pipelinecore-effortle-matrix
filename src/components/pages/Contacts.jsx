@@ -51,9 +51,11 @@ const Contacts = () => {
     if (searchTerm) {
 filtered = filtered.filter(contact =>
         contact.first_name_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        contact.last_name_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+contact.last_name_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         contact.email_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        contact.company_c?.toLowerCase().includes(searchTerm.toLowerCase())
+        contact.company_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        contact.address_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        contact.status_c?.toLowerCase().includes(searchTerm.toLowerCase())
       )
     }
 
@@ -149,7 +151,7 @@ if (sortBy === "last_activity_c" || sortBy === "created_at_c") {
             <SearchBar
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search contacts by name, email, or company..."
+placeholder="Search contacts by name, email, department, address, or status..."
               className="w-full"
             />
           </div>
@@ -161,7 +163,7 @@ if (sortBy === "last_activity_c" || sortBy === "created_at_c") {
               className="border border-slate-300 rounded-md px-2 py-1 text-sm"
             >
               <option value="name">Name</option>
-              <option value="company">Company</option>
+<option value="company">Department</option>
               <option value="lastActivity">Last Activity</option>
               <option value="createdAt">Created Date</option>
             </select>
@@ -205,12 +207,12 @@ if (sortBy === "last_activity_c" || sortBy === "created_at_c") {
                       <ApperIcon name={getSortIcon("name")} className="h-4 w-4" />
                     </div>
                   </th>
-                  <th 
+<th 
                     className="px-6 py-4 text-left text-sm font-semibold text-slate-900 cursor-pointer hover:bg-slate-100 transition-colors duration-200"
                     onClick={() => handleSort("company")}
                   >
                     <div className="flex items-center gap-2">
-                      Company
+                      Department
                       <ApperIcon name={getSortIcon("company")} className="h-4 w-4" />
                     </div>
                   </th>
@@ -276,7 +278,18 @@ if (sortBy === "last_activity_c" || sortBy === "created_at_c") {
                         ))}
                       </div>
                     </td>
-<td className="px-6 py-4 text-sm text-slate-600">
+<td className="px-6 py-4">
+                      <Badge variant={
+                        contact.status_c === 'New' ? 'blue' :
+                        contact.status_c === 'In Progress' ? 'yellow' :
+                        contact.status_c === 'Completed' ? 'green' :
+                        contact.status_c === 'On Hold' ? 'orange' :
+                        contact.status_c === 'Cancelled' ? 'red' : 'default'
+                      }>
+                        {contact.status_c || 'New'}
+                      </Badge>
+                    </td>
+                    <td className="px-6 py-4 text-sm text-slate-600">
                       {format(new Date(contact.last_activity_c), "MMM dd, yyyy")}
                     </td>
                     <td className="px-6 py-4">

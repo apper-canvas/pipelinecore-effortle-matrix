@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import { toast } from "react-toastify"
-import Button from "@/components/atoms/Button"
-import FormField from "@/components/molecules/FormField"
-import ApperIcon from "@/components/ApperIcon"
-import { contactService } from "@/services/api/contactService"
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { toast } from "react-toastify";
+import { contactService } from "@/services/api/contactService";
+import ApperIcon from "@/components/ApperIcon";
+import FormField from "@/components/molecules/FormField";
+import Select from "@/components/atoms/Select";
+import Button from "@/components/atoms/Button";
 
 const ContactModal = ({ contact, isOpen, onClose, onSave }) => {
 const [formData, setFormData] = useState({
@@ -14,6 +15,9 @@ const [formData, setFormData] = useState({
     phone_c: "",
     company_c: "",
     position_c: "",
+    linkedinprofile_c: "",
+    address_c: "",
+    status_c: "New",
     tags_c: []
   })
   const [loading, setLoading] = useState(false)
@@ -28,6 +32,9 @@ useEffect(() => {
         phone_c: contact.phone_c || "",
         company_c: contact.company_c || "",
         position_c: contact.position_c || "",
+        linkedinprofile_c: contact.linkedinprofile_c || "",
+        address_c: contact.address_c || "",
+        status_c: contact.status_c || "New",
         tags_c: Array.isArray(contact.tags_c) ? contact.tags_c : (contact.tags_c ? contact.tags_c.split(',').filter(Boolean) : [])
       })
     } else {
@@ -38,6 +45,9 @@ useEffect(() => {
         phone_c: "",
         company_c: "",
         position_c: "",
+        linkedinprofile_c: "",
+        address_c: "",
+        status_c: "New",
         tags_c: []
       })
     }
@@ -155,7 +165,7 @@ const removeTag = (tagToRemove) => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 <FormField
-              label="Company"
+              label="Department"
               value={formData.company_c}
               onChange={(e) => setFormData(prev => ({ ...prev, company_c: e.target.value }))}
             />
@@ -164,6 +174,41 @@ const removeTag = (tagToRemove) => {
               label="Position"
               value={formData.position_c}
               onChange={(e) => setFormData(prev => ({ ...prev, position_c: e.target.value }))}
+            />
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <FormField
+              label="LinkedIn Profile"
+              value={formData.linkedinprofile_c}
+              onChange={(e) => setFormData(prev => ({ ...prev, linkedinprofile_c: e.target.value }))}
+              placeholder="https://linkedin.com/in/username"
+            />
+            
+            <div>
+              <label className="block text-sm font-semibold text-slate-700 mb-2">
+                Status
+              </label>
+              <Select
+                value={formData.status_c}
+                onChange={(e) => setFormData(prev => ({ ...prev, status_c: e.target.value }))}
+                className="w-full"
+              >
+                <option value="New">New</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+                <option value="On Hold">On Hold</option>
+                <option value="Cancelled">Cancelled</option>
+              </Select>
+            </div>
+          </div>
+          
+          <div className="col-span-full">
+            <FormField
+              label="Address"
+              value={formData.address_c}
+              onChange={(e) => setFormData(prev => ({ ...prev, address_c: e.target.value }))}
+              placeholder="Street address, City, State, ZIP"
             />
           </div>
 
