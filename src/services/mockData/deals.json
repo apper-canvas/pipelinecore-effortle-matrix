@@ -1,0 +1,110 @@
+[
+  {
+    "Id": 1,
+    "title": "TechCorp CRM Implementation",
+    "contactId": "1",
+    "company": "TechCorp Solutions",
+    "value": 85000,
+    "stage": "Negotiation",
+    "probability": 90,
+    "expectedCloseDate": "2024-02-15T00:00:00Z",
+    "createdAt": "2024-01-15T08:00:00Z",
+    "lastUpdated": "2024-01-20T14:30:00Z"
+  },
+  {
+    "Id": 2,
+    "title": "Design Studio Software License",
+    "contactId": "2",
+    "company": "Innovate Design Studio",
+    "value": 25000,
+    "stage": "Proposal",
+    "probability": 75,
+    "expectedCloseDate": "2024-02-28T00:00:00Z",
+    "createdAt": "2024-01-18T10:15:00Z",
+    "lastUpdated": "2024-01-22T09:45:00Z"
+  },
+  {
+    "Id": 3,
+    "title": "Global Finance Process Automation",
+    "contactId": "3",
+    "company": "Global Finance Group",
+    "value": 120000,
+    "stage": "Qualified",
+    "probability": 50,
+    "expectedCloseDate": "2024-03-15T00:00:00Z",
+    "createdAt": "2024-01-20T16:20:00Z",
+    "lastUpdated": "2024-01-21T11:00:00Z"
+  },
+  {
+    "Id": 4,
+    "title": "RetailPlus Integration Platform",
+    "contactId": "4",
+    "company": "RetailPlus Inc",
+    "value": 95000,
+    "stage": "Lead",
+    "probability": 25,
+    "expectedCloseDate": "2024-04-01T00:00:00Z",
+    "createdAt": "2024-01-22T13:30:00Z",
+    "lastUpdated": "2024-01-23T15:20:00Z"
+  },
+  {
+    "Id": 5,
+    "title": "HealthSystems Analytics Suite",
+    "contactId": "5",
+    "company": "HealthSystems Pro",
+    "value": 150000,
+    "stage": "Qualified",
+    "probability": 50,
+    "expectedCloseDate": "2024-03-30T00:00:00Z",
+    "createdAt": "2024-01-25T11:45:00Z",
+    "lastUpdated": "2024-01-26T10:30:00Z"
+  },
+  {
+    "Id": 6,
+    "title": "EducationTech Student Management",
+    "contactId": "6",
+    "company": "EducationTech Solutions",
+    "value": 45000,
+    "stage": "Proposal",
+    "probability": 75,
+    "expectedCloseDate": "2024-02-20T00:00:00Z",
+    "createdAt": "2024-01-28T09:00:00Z",
+    "lastUpdated": "2024-01-29T14:15:00Z"
+  },
+  {
+    "Id": 7,
+    "title": "ManufactureCorp Quality System",
+    "contactId": "7",
+    "company": "ManufactureCorp",
+    "value": 75000,
+    "stage": "Closed Won",
+    "probability": 100,
+    "expectedCloseDate": "2024-01-31T00:00:00Z",
+    "createdAt": "2024-01-30T12:30:00Z",
+    "lastUpdated": "2024-01-31T16:45:00Z"
+  },
+  {
+    "Id": 8,
+    "title": "LogisticsPro Fleet Management",
+    "contactId": "8",
+    "company": "LogisticsPro",
+    "value": 65000,
+    "stage": "Lead",
+    "probability": 25,
+    "expectedCloseDate": "2024-04-15T00:00:00Z",
+    "createdAt": "2024-02-02T08:15:00Z",
+    "lastUpdated": "2024-02-03T13:20:00Z"
+  },
+  {
+    "Id": 9,
+    "title": "StartupTech MVP Development",
+    "contactId": "2",
+    "company": "Innovate Design Studio",
+    "value": 35000,
+    "stage": "Closed Lost",
+    "probability": 0,
+    "expectedCloseDate": "2024-01-25T00:00:00Z",
+    "createdAt": "2024-01-10T14:00:00Z",
+    "lastUpdated": "2024-01-25T09:30:00Z"
+  }
+]

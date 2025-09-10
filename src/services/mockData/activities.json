@@ -1,0 +1,122 @@
+[
+  {
+    "Id": 1,
+    "type": "Call",
+    "subject": "Initial Discovery Call with Sarah Johnson",
+    "notes": "Discussed current tech stack and pain points. Sarah mentioned they're looking for a comprehensive CRM solution to streamline their sales process. Next step: schedule demo.",
+    "contactId": "1",
+    "dealId": "1",
+    "date": "2024-01-20T14:30:00Z",
+    "duration": 45
+  },
+  {
+    "Id": 2,
+    "type": "Email",
+    "subject": "Follow-up: Demo scheduling",
+    "notes": "Sent calendar invite for product demo next week. Included case studies from similar tech companies.",
+    "contactId": "1",
+    "dealId": "1",
+    "date": "2024-01-20T15:15:00Z",
+    "duration": 0
+  },
+  {
+    "Id": 3,
+    "type": "Meeting",
+    "subject": "Design Review with Michael Chen",
+    "notes": "Reviewed design requirements and integration needs. Michael is impressed with our UI/UX capabilities. Discussed pricing tiers.",
+    "contactId": "2",
+    "dealId": "2",
+    "date": "2024-01-22T09:45:00Z",
+    "duration": 60
+  },
+  {
+    "Id": 4,
+    "type": "Task",
+    "subject": "Prepare custom proposal for Global Finance",
+    "notes": "Need to create tailored proposal highlighting automation features for financial processes. Include ROI calculations.",
+    "contactId": "3",
+    "dealId": "3",
+    "date": "2024-01-21T11:00:00Z",
+    "duration": 0
+  },
+  {
+    "Id": 5,
+    "type": "Call",
+    "subject": "Technical deep-dive with David Thompson",
+    "notes": "Discussed integration capabilities with existing retail systems. David has concerns about data migration timeline.",
+    "contactId": "4",
+    "dealId": "4",
+    "date": "2024-01-23T15:20:00Z",
+    "duration": 35
+  },
+  {
+    "Id": 6,
+    "type": "Email",
+    "subject": "Healthcare compliance requirements",
+    "notes": "Sent detailed information about HIPAA compliance features and security certifications to Lisa Wang.",
+    "contactId": "5",
+    "dealId": "5",
+    "date": "2024-01-26T10:30:00Z",
+    "duration": 0
+  },
+  {
+    "Id": 7,
+    "type": "Meeting",
+    "subject": "Demo presentation for EducationTech",
+    "notes": "Conducted full product demo focusing on student management features. Robert was very positive about the integration possibilities.",
+    "contactId": "6",
+    "dealId": "6",
+    "date": "2024-01-29T14:15:00Z",
+    "duration": 90
+  },
+  {
+    "Id": 8,
+    "type": "Call",
+    "subject": "Contract negotiation with Amanda Foster",
+    "notes": "Discussed final terms and conditions. Amanda needs to get approval from finance team. Contract should be signed by end of month.",
+    "contactId": "7",
+    "dealId": "7",
+    "date": "2024-01-31T16:45:00Z",
+    "duration": 30
+  },
+  {
+    "Id": 9,
+    "type": "Note",
+    "subject": "LogisticsPro research notes",
+    "notes": "Researched their current fleet management challenges. They're using outdated systems and need real-time tracking capabilities.",
+    "contactId": "8",
+    "dealId": "8",
+    "date": "2024-02-03T13:20:00Z",
+    "duration": 0
+  },
+  {
+    "Id": 10,
+    "type": "Email",
+    "subject": "Thank you and next steps",
+    "notes": "Sent thank you email after successful contract signing with ManufactureCorp. Scheduled implementation kickoff meeting.",
+    "contactId": "7",
+    "dealId": "7",
+    "date": "2024-02-01T09:00:00Z",
+    "duration": 0
+  },
+  {
+    "Id": 11,
+    "type": "Call",
+    "subject": "Quarterly check-in with Sarah",
+    "notes": "Discussed implementation progress and upcoming feature requests. Sarah is very satisfied with the results so far.",
+    "contactId": "1",
+    "dealId": "1",
+    "date": "2024-02-05T10:30:00Z",
+    "duration": 25
+  },
+  {
+    "Id": 12,
+    "type": "Meeting",
+    "subject": "Healthcare analytics workshop",
+    "notes": "Conducted workshop on advanced analytics features for healthcare data. Lisa was impressed with reporting capabilities.",
+    "contactId": "5",
+    "dealId": "5",
+    "date": "2024-02-07T14:00:00Z",
+    "duration": 120
+  }
+]
