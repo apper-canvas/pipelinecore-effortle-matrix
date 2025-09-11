@@ -80,7 +80,7 @@ const LeadModal = ({ isOpen, onClose, onSuccess, lead = null }) => {
       newErrors.email_c = "Please enter a valid email address"
     }
 
-    if (formData.phone_c && !/^[\d\s\-\(\)\+]+$/.test(formData.phone_c)) {
+if (formData.phone_c && !/^[\d\s\-()+ ]+$/.test(formData.phone_c)) {
       newErrors.phone_c = "Please enter a valid phone number"
     }
 
