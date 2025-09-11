@@ -162,8 +162,6 @@ setLoading(true)
       setLoading(false)
     }
 }
-  }
-
   const handleClose = () => {
     if (!loading) {
       onClose()

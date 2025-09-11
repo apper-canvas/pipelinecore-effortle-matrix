@@ -218,7 +218,6 @@ phone_c: contactData.phone_c || '',
         return successful.length > 0
       }
       
-      return false
 return false
     } catch (error) {
       console.error("Error deleting contact:", error?.response?.data?.message || error)
