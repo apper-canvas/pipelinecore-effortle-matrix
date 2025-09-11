@@ -1,24 +1,28 @@
-import React, { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import ApperIcon from "@/components/ApperIcon"
-import Button from "@/components/atoms/Button"
-import Input from "@/components/atoms/Input"
-import Select from "@/components/atoms/Select"
-import FormField from "@/components/molecules/FormField"
-import { createLead, updateLead } from "@/services/api/leadService"
-import { toast } from "react-toastify"
-
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import contactService from "@/services/api/contactService";
+import { toast } from "react-toastify";
+import { getAll } from "@/services/api/companyService";
+import { createLead, updateLead } from "@/services/api/leadService";
+import ApperIcon from "@/components/ApperIcon";
+import FormField from "@/components/molecules/FormField";
+import Button from "@/components/atoms/Button";
+import Input from "@/components/atoms/Input";
+import Select from "@/components/atoms/Select";
 const LeadModal = ({ isOpen, onClose, onSuccess, lead = null }) => {
-  const [formData, setFormData] = useState({
+const [formData, setFormData] = useState({
     firstName_c: "",
     lastName_c: "",
     email_c: "",
     phone_c: "",
     company_c: "",
     title_c: "",
+    contact_c: "",
     status_c: "New",
     source_c: "Web"
   })
+  const [contacts, setContacts] = useState([])
+  const [contactsLoading, setContactsLoading] = useState(false)
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState({})
 
@@ -37,7 +41,7 @@ const LeadModal = ({ isOpen, onClose, onSuccess, lead = null }) => {
   ]
 
   useEffect(() => {
-    if (lead) {
+if (lead) {
       setFormData({
         firstName_c: lead.firstName_c || "",
         lastName_c: lead.lastName_c || "",
@@ -45,6 +49,7 @@ const LeadModal = ({ isOpen, onClose, onSuccess, lead = null }) => {
         phone_c: lead.phone_c || "",
         company_c: lead.company_c || "",
         title_c: lead.title_c || "",
+        contact_c: lead.contact_c?.Id || lead.contact_c || "",
         status_c: lead.status_c || "New",
         source_c: lead.source_c || "Web"
       })
@@ -56,12 +61,33 @@ const LeadModal = ({ isOpen, onClose, onSuccess, lead = null }) => {
         phone_c: "",
         company_c: "",
         title_c: "",
+        contact_c: "",
         status_c: "New",
         source_c: "Web"
       })
     }
     setErrors({})
   }, [lead, isOpen])
+
+  // Load contacts for lookup
+  useEffect(() => {
+    const loadContacts = async () => {
+      if (isOpen && contacts.length === 0) {
+        setContactsLoading(true)
+        try {
+          const contactData = await contactService.getAll()
+          setContacts(contactData || [])
+        } catch (error) {
+          console.error("Error loading contacts:", error)
+          toast.error("Failed to load contacts")
+        } finally {
+          setContactsLoading(false)
+        }
+      }
+    }
+    
+    loadContacts()
+  }, [isOpen, contacts.length])
 
   const validateForm = () => {
     const newErrors = {}
@@ -110,14 +136,20 @@ if (formData.phone_c && !/^[\d\s\-()+ ]+$/.test(formData.phone_c)) {
       return
     }
 
-    setLoading(true)
+setLoading(true)
     
     try {
+      // Prepare form data with contact_c as integer if selected
+      const submitData = {
+        ...formData,
+        contact_c: formData.contact_c ? parseInt(formData.contact_c) : null
+      }
+      
       let result
       if (lead) {
-        result = await updateLead(lead.Id, formData)
+        result = await updateLead(lead.Id, submitData)
       } else {
-        result = await createLead(formData)
+        result = await createLead(submitData)
       }
 
       if (result) {
@@ -129,6 +161,7 @@ if (formData.phone_c && !/^[\d\s\-()+ ]+$/.test(formData.phone_c)) {
     } finally {
       setLoading(false)
     }
+}
   }
 
   const handleClose = () => {
@@ -246,6 +279,26 @@ if (formData.phone_c && !/^[\d\s\-()+ ]+$/.test(formData.phone_c)) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FormField
+              label="Contact"
+              error={errors.contact_c}
+            >
+              <Select
+                value={formData.contact_c}
+                onChange={(e) => handleInputChange("contact_c", e.target.value)}
+                disabled={contactsLoading || loading}
+              >
+                <option value="">
+                  {contactsLoading ? "Loading contacts..." : "Select a contact"}
+                </option>
+                {contacts.map((contact) => (
+                  <option key={contact.Id} value={contact.Id}>
+                    {contact.Name || `${contact.first_name_c || ''} ${contact.last_name_c || ''}`.trim() || contact.email_c}
+                  </option>
+                ))}
+              </Select>
+            </FormField>
+
+            <FormField
               label="Status"
               error={errors.status_c}
             >
@@ -261,7 +314,9 @@ if (formData.phone_c && !/^[\d\s\-()+ ]+$/.test(formData.phone_c)) {
                 ))}
               </Select>
             </FormField>
+          </div>
 
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FormField
               label="Source"
               error={errors.source_c}

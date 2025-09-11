@@ -219,11 +219,14 @@ phone_c: contactData.phone_c || '',
       }
       
       return false
+return false
     } catch (error) {
       console.error("Error deleting contact:", error?.response?.data?.message || error)
       throw error
     }
   }
 }
+
+export default new ContactService()
 
 export const contactService = new ContactService()
