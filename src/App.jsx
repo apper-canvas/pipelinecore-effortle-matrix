@@ -15,7 +15,7 @@ import Contacts from "@/components/pages/Contacts"
 import Companies from "@/components/pages/Companies"
 import Deals from "@/components/pages/Deals"
 import Activities from "@/components/pages/Activities"
-
+import Leads from "@/components/pages/Leads"
 // Create auth context
 export const AuthContext = createContext(null)
 
@@ -135,7 +135,8 @@ function AppContent() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="contacts" element={<Contacts />} />
 <Route path="companies" element={<Companies />} />
-            <Route path="deals" element={<Deals />} />
+<Route path="deals" element={<Deals />} />
+            <Route path="leads" element={<Leads />} />
             <Route path="activities" element={<Activities />} />
           </Route>
         </Routes>
