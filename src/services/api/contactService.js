@@ -14,9 +14,21 @@ class ContactService {
       })
     }
   }
+isAuthenticated() {
+    // Check if user is authenticated by looking at Redux store or authentication state
+    if (typeof window !== 'undefined' && window.store) {
+      const state = window.store.getState()
+      return state.user?.isAuthenticated || false
+    }
+    return false
+  }
 
   async getAll() {
     if (!this.apperClient) this.initializeClient()
+    
+    if (!this.apperClient) {
+      throw new Error('ApperClient not initialized. Please ensure the ApperSDK is loaded.')
+    }
     
     try {
       const params = {
@@ -25,7 +37,7 @@ class ContactService {
           {"field": {"Name": "first_name_c"}},
           {"field": {"Name": "last_name_c"}},
           {"field": {"Name": "email_c"}},
-{"field": {"Name": "phone_c"}},
+          {"field": {"Name": "phone_c"}},
           {"field": {"Name": "company_c"}},
           {"field": {"Name": "position_c"}},
           {"field": {"Name": "linkedinprofile_c"}},
@@ -52,9 +64,12 @@ class ContactService {
       return []
     }
   }
-
-  async getById(id) {
+async getById(id) {
     if (!this.apperClient) this.initializeClient()
+    
+    if (!this.apperClient) {
+      throw new Error('ApperClient not initialized. Please ensure the ApperSDK is loaded.')
+    }
     
     try {
       const params = {
@@ -64,7 +79,7 @@ class ContactService {
           {"field": {"Name": "last_name_c"}},
           {"field": {"Name": "email_c"}},
           {"field": {"Name": "phone_c"}},
-{"field": {"Name": "company_c"}},
+          {"field": {"Name": "company_c"}},
           {"field": {"Name": "position_c"}},
           {"field": {"Name": "linkedinprofile_c"}},
           {"field": {"Name": "address_c"}},
@@ -88,9 +103,12 @@ class ContactService {
       return null
     }
   }
-
-  async create(contactData) {
+async create(contactData) {
     if (!this.apperClient) this.initializeClient()
+    
+    if (!this.apperClient) {
+      throw new Error('ApperClient not initialized. Please ensure the ApperSDK is loaded.')
+    }
     
     try {
       const params = {
@@ -98,7 +116,7 @@ class ContactService {
           Name: `${contactData.first_name_c || ''} ${contactData.last_name_c || ''}`.trim(),
           first_name_c: contactData.first_name_c || '',
           last_name_c: contactData.last_name_c || '',
-email_c: contactData.email_c || '',
+          email_c: contactData.email_c || '',
           phone_c: contactData.phone_c || '',
           company_c: contactData.company_c || '',
           position_c: contactData.position_c || '',
@@ -138,9 +156,12 @@ email_c: contactData.email_c || '',
       throw error
     }
   }
-
-  async update(id, contactData) {
+async update(id, contactData) {
     if (!this.apperClient) this.initializeClient()
+    
+    if (!this.apperClient) {
+      throw new Error('ApperClient not initialized. Please ensure the ApperSDK is loaded.')
+    }
     
     try {
       const params = {
@@ -150,7 +171,7 @@ email_c: contactData.email_c || '',
           first_name_c: contactData.first_name_c || '',
           last_name_c: contactData.last_name_c || '',
           email_c: contactData.email_c || '',
-phone_c: contactData.phone_c || '',
+          phone_c: contactData.phone_c || '',
           company_c: contactData.company_c || '',
           position_c: contactData.position_c || '',
           linkedinprofile_c: contactData.linkedinprofile_c || '',
@@ -192,6 +213,10 @@ phone_c: contactData.phone_c || '',
   async delete(id) {
     if (!this.apperClient) this.initializeClient()
     
+    if (!this.apperClient) {
+      throw new Error('ApperClient not initialized. Please ensure the ApperSDK is loaded.')
+    }
+    
     try {
       const params = { 
         RecordIds: [parseInt(id)]
@@ -218,7 +243,7 @@ phone_c: contactData.phone_c || '',
         return successful.length > 0
       }
       
-return false
+      return false
     } catch (error) {
       console.error("Error deleting contact:", error?.response?.data?.message || error)
       throw error
